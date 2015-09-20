@@ -25,9 +25,20 @@ var ImgurGallery = React.createClass({
   },
 
   componentDidMount: function () {
-    this.getImages();
+    //this.getImages();
+    this.getImages2();
   },
 
+  getImages2: function () {
+    setTimeout((function () {
+      var urls = ['http://pic25.nipic.com/20121209/9252150_194258033000_2.jpg']; //just for test
+
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(urls),
+        loaded: true
+      });
+    }).bind(this), 4000);
+  },
   getImages: function () {
     var request = new XMLHttpRequest();
     request.onreadystatechange = (e) => {
@@ -35,25 +46,33 @@ var ImgurGallery = React.createClass({
         return;
       }
 
-      if (request.status === 200) {
-        var urls = [];
-        var data = JSON.parse(request.responseText).data;
-        for (var i = 0; i < data.length; ++i) {
-          if (!data[i].animated) {
-            var url = data[i].link;
-            var lastDotPos = url.lastIndexOf('.');
-            urls.push(url.substring(0, lastDotPos) + 'm' + url.substring(lastDotPos, url.length));
-          }
-        }
+      //if (request.status === 200) {
+      //  var urls = [];
+      //  var data = JSON.parse(request.responseText).data;
+      //  for (var i = 0; i < data.length; ++i) {
+      //    if (!data[i].animated) {
+      //      var url = data[i].link;
+      //      var lastDotPos = url.lastIndexOf('.');
+      //      urls.push(url.substring(0, lastDotPos) + 'm' + url.substring(lastDotPos, url.length));
+      //    }
+      //  }
+      //
+      //  this.setState({
+      //    dataSource: this.state.dataSource.cloneWithRows(urls),
+      //    loaded: true
+      //  });
+      //}
+      console.log(request.status);
+      var urls = ['http://pic25.nipic.com/20121209/9252150_194258033000_2.jpg']; //just for test
 
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(urls),
-          loaded: true
-        });
-      }
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(urls),
+        loaded: true
+      });
+
     };
-    request.open('GET', 'https://api.imgur.com/3/gallery/r/aww/top/0');
-    request.setRequestHeader("Authorization", "Client-ID 5d406542be855a3")
+    request.open('GET', 'http://pic25.nipic.com/20121209/9252150_194258033000_2.jpg');
+    request.setRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36");
     request.send();
   },
 
@@ -107,4 +126,4 @@ var styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('Test', () => ImgurGallery);
+module.exports = ImgurGallery;
