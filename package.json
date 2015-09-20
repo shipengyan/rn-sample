@@ -1,0 +1,13 @@
+{
+  "name": "reactAndroidSample",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node_modules/react-native/packager/packager.sh",
+    "start2": "node node_modules/react-native/packager/packager.js"
+  },
+  "dependencies": {
+    "react-native": "^0.11.0",
+    "react-native-button": "^1.2.1"
+  }
+}
