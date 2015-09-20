@@ -18,6 +18,7 @@ xcuserdata
 *.moved-aside
 DerivedData
 *.hmap
+
 *.ipa
 *.xcuserstate
 project.xcworkspace
@@ -29,5 +30,5 @@ npm-debug.log
 
 # ide
 #
-/.idea/
-android/.gradle
+/android/.gradle
+/.idea
