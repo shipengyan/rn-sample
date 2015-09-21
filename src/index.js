@@ -6,11 +6,14 @@
 var React = require('react-native');
 var Button = require('react-native-button');
 
-var {ScrollView} = React;
+var {View, ScrollView, BackAndroid, Text} = React;
 
 var loadImgDemoPage = require('./demo/loadImgDemo');
+var nextPage = require('./demo/nextPage');
 
 var Index = React.createClass({
+
+  displayName: 'IndexPage',
 
   getInitialState: function () {
     return {}
@@ -19,25 +22,31 @@ var Index = React.createClass({
   render: function () {
 
     return (
-      <ScrollView>
+      <View>
         <Button onPress={this._goPage.bind(this,'LOAD_IMG')}>Load Img</Button>
-      </ScrollView>
+        <Text onPress={this._goPage.bind(this,'TEXT_PAGE')}>Text Page</Text>
+      </View>
     );
   },
 
   _goPage: function (page) {
-    var router;
+    var component, router;
     switch (page) {
       case 'LOAD_IMG':
-        router = {name: page, component: loadImgDemoPage};
+        component = loadImgDemoPage;
+        break;
+
+      case 'TEXT_PAGE':
+        component = nextPage;
         break;
     }
 
-    if (!router) {
+    if (!component) {
       console.log('router is null, so return');
       return;
     }
-    this.props.goForward(router);
+    router = {name: page, component: component};
+    this.props.route.toRoute(router);
   }
 });
 

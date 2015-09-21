@@ -11,7 +11,8 @@ var {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  BackAndroid
   } = React;
 
 var ImgurGallery = React.createClass({
@@ -24,9 +25,22 @@ var ImgurGallery = React.createClass({
     };
   },
 
+
   componentDidMount: function () {
     //this.getImages();
     this.getImages2();
+
+    console.log('componentDidMount()');
+
+    var self = this;
+    //it does not work now.
+    BackAndroid.addEventListener('hardwareBackPress', function () {
+      console.log('back press event.');
+
+      self.props.route.toBack();
+
+      return true;
+    });
   },
 
   getImages2: function () {
